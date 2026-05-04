@@ -24,7 +24,7 @@
       <div class="cellRight">{{selectedProduct()?.description}}</div>
     </div><div class="row">
       <div class="cellLeft">Price:</div>
-      <div class="cellRight">{{selectedProduct()?.price}}</div>
+      <div class="cellRight">{{selectedProduct()?.price | number: '1.2-2' }}</div>
     </div>
 
     <div class="row">
@@ -32,7 +32,9 @@
         <label for="quantity">Quantity:</label>
       </div>
       <div class="cellRight">
+        <button class="qtyButton qtyButtonLeft" (click)="onDecrease()">-</button>
         <input type="number" class="quantityInput" name="quantity" id="quantity" [(ngModel)]="quantity">
+        <button class="qtyButton qtyButtonRight" (click)="onIncrease()">+</button>
       </div>
     </div>
   </div>

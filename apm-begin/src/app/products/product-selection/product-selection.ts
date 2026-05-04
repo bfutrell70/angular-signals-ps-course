@@ -12,6 +12,7 @@ import { ProductData } from '../product-data';
 export class ProductSelection {
   pageTitle = 'Product Selection';
 
+  selectedProduct = signal<Product | undefined>(undefined);
   quantity = signal(1);
   products = signal<Product[]>(ProductData.products);
 }

@@ -24,7 +24,7 @@
       <div class="cellRight">{{selectedProduct()?.description}}</div>
     </div><div class="row">
       <div class="cellLeft">Price:</div>
-      <div class="cellRight">{{selectedProduct()?.price | number: '1.2-2' }}</div>
+      <div class="cellRight">{{selectedProduct()?.price | currency }}</div>
     </div>
 
     <div class="row">
@@ -38,6 +38,10 @@
           <button class="qtyButton qtyButtonRight" (click)="onIncrease()">+</button>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Total:</div>
+      <div class="cellRight" [style.color]="color()">{{total() | currency}}</div>
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../product';
 import { ProductData } from '../product-data';
@@ -26,4 +26,8 @@ export class ProductSelection {
   onIncrease(): void {
     this.quantity.update(q => q + 1);
   }
+
+  qtyEffect = effect(() => {
+    console.log(this.quantity());
+  })
 }

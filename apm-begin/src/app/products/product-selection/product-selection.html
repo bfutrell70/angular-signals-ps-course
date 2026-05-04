@@ -32,9 +32,11 @@
         <label for="quantity">Quantity:</label>
       </div>
       <div class="cellRight">
-        <button class="qtyButton qtyButtonLeft" (click)="onDecrease()">-</button>
-        <input type="number" class="quantityInput" name="quantity" id="quantity" [(ngModel)]="quantity">
-        <button class="qtyButton qtyButtonRight" (click)="onIncrease()">+</button>
+        <div class="inputContainer">
+          <button class="qtyButton qtyButtonLeft" (click)="onDecrease()">-</button>
+          <input type="number" class="quantityInput" name="quantity" id="quantity" [(ngModel)]="quantity">
+          <button class="qtyButton qtyButtonRight" (click)="onIncrease()">+</button>
+        </div>
       </div>
     </div>
   </div>

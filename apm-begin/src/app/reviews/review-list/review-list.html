@@ -1,5 +1,11 @@
 <div class="container">
-  <!-- @if (reviews().length) {
+  @if (isLoading()) {
+    <div>...loading reviews</div>
+  }
+  @else if (error()) {
+    <div style="color: red;">An error occurred loading reviews: {{ errorMessage() }}</div>
+  }
+  @else if (reviews().length) {
     <table>
       <caption>Product Reviews</caption>
       <thead>
@@ -27,5 +33,5 @@
     </table>
   } @else if (!isLoading()) {
     <div>No reviews found for the selected product</div>
-  } -->
+  }
 </div>

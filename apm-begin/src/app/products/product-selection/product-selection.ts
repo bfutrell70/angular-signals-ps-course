@@ -29,6 +29,9 @@ export class ProductSelection {
   // productsResource = this.productService.createProducts();
   // products = this.productsResource.value;
   products = this.productService.productsResource.value;
+  isLoading = this.productService.productsResource.isLoading;
+  error = this.productService.productsResource.error;
+  errorMessage = computed(() => this.error() ? this.error()?.message : '');
 
   // using nullish coalescing operator '??'
   total = computed(() => (this.selectedProduct()?.price ?? 0) * this.quantity());

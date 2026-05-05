@@ -1,7 +1,12 @@
 <div class="content">
-  <div class="title">
-    {{pageTitle}}
-  </div>
+  <div class="title">{{pageTitle}}</div>
+
+  @if (isLoading()) {
+  <div>...loading products</div>
+  } @else if (errorMessage()) {
+    <div style="color: red;">An error occurred:{{ errorMessage() }}</div>
+  } 
+  @else {
 
   <div class="grid">
     <div class="row">
@@ -9,7 +14,7 @@
         <select [(ngModel)]="selectedProduct">
           <option value="undefined" selected>--Select a product--</option>
           @for (product of products(); track product.id) {
-            <option [ngValue]="product">{{ product.productName }}</option>
+          <option [ngValue]="product">{{ product.productName }}</option>
           }
         </select>
       </div>
@@ -22,7 +27,8 @@
     <div class="row">
       <div class="cellLeft">Description:</div>
       <div class="cellRight">{{selectedProduct()?.description}}</div>
-    </div><div class="row">
+    </div>
+    <div class="row">
       <div class="cellLeft">Price:</div>
       <div class="cellRight">{{selectedProduct()?.price | currency }}</div>
     </div>
@@ -33,16 +39,22 @@
       </div>
       <div class="cellRight">
         <div class="inputContainer">
-          <button class="qtyButton qtyButtonLeft" (click)="onDecrease()">-</button>
-          <input type="number" class="quantityInput" name="quantity" id="quantity" [(ngModel)]="quantity">
-          <button class="qtyButton qtyButtonRight" (click)="onIncrease()">+</button>
+          <button class="qtyButton qtyButtonLeft" (click)="onDecrease()">
+            -
+          </button>
+          <input type="number" class="quantityInput" name="quantity" id="quantity" [(ngModel)]="quantity" />
+          <button class="qtyButton qtyButtonRight" (click)="onIncrease()">
+            +
+          </button>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="cellLeft">Total:</div>
-      <div class="cellRight" [style.color]="color()">{{total() | currency}}</div>
+      <div class="cellRight" [style.color]="color()">
+        {{total() | currency}}
+      </div>
     </div>
   </div>
-
+  }
 </div>

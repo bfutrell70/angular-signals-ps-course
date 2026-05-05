@@ -17,7 +17,9 @@ export class ProductSelection {
   // template should not access service directly
   private productService = inject(ProductService);
 
-  selectedProduct = signal<Product | undefined>(undefined);
+  // referencing the signal and not the value
+  selectedProduct = this.productService.selectedProduct;
+
   // this resets the quantity to 1 when the selected product changes
   quantity = linkedSignal({
     source: this.selectedProduct,

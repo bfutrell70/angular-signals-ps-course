@@ -1,4 +1,4 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, linkedSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../product';
 import { ProductData } from '../product-data';
@@ -14,7 +14,12 @@ export class ProductSelection {
   pageTitle = 'Product Selection';
 
   selectedProduct = signal<Product | undefined>(undefined);
-  quantity = signal(1);
+  // this resets the quantity to 1 when the selected product changes
+  quantity = linkedSignal({
+    source: this.selectedProduct,
+    computation: p => 1
+  });
+
   products = signal<Product[]>(ProductData.products);
 
   // using nullish coalescing operator '??'

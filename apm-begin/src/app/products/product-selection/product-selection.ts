@@ -24,6 +24,10 @@ export class ProductSelection {
     computation: p => 1
   });
 
+  // creating the resource this way will destroy the resource once the component is destroyed
+  // each time the component is loaded the API call is made.
+  // productsResource = this.productService.createProducts();
+  // products = this.productsResource.value;
   products = this.productService.productsResource.value;
 
   // using nullish coalescing operator '??'

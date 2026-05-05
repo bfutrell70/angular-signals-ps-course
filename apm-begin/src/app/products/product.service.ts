@@ -8,5 +8,10 @@ import { Product } from './product';
 export class ProductService {
   private productsUrl = 'api/products';
 
+  // how does this access products in app-data.ts?
   productsResource = httpResource<Product[]>(() => this.productsUrl, { defaultValue: []});
+
+  // createProducts() {
+  //   return httpResource<Product[]>(() => this.productsUrl, { defaultValue: []});
+  // }
 }

@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { effect, inject, Injectable } from '@angular/core';
 import { ProductService } from '../products/product.service';
 import { httpResource } from '@angular/common/http';
 import { Review } from './review';
@@ -11,6 +11,32 @@ export class ReviewService {
 
   private productService = inject(ProductService);
 
-  reviewsResource = httpResource<Review[]>(() => 
-  `${this.reviewsUrl}?productId=^${this.productService.selectedProduct()?.id}$`, { defaultValue: []});
+  // reviewsResource = httpResource<Review[]>(() => 
+  //   `${this.reviewsUrl}?productId=^${this.productService.selectedProduct()?.id}$`, { defaultValue: []});
+  
+  // handles not having a selected product
+  reviewsResource = httpResource<Review[]>(() => {
+    const p = this.productService.selectedProduct();
+
+    if (p) {
+      return `${this.reviewsUrl}?productId=^${p.id}$`;
+    } else {
+      return undefined;
+    }
+  },
+  { defaultValue: []});
+
+  // // example of passing in product ID using an options object
+  // reviewsResource = httpResource<Review[]>(() => ({
+  //   url: this.reviewsUrl,
+  //   method: 'GET',
+  //   headers: {
+  //     accept: 'application/json'
+  //   },
+  //   params: {
+  //     productId: `^${this.productService.selectedProduct()?.id ?? 0}$`
+  //   }
+  // }));
+  
+  eff = effect(() => console.log(`loading reviews`, this.reviewsResource.isLoading()));
 }
